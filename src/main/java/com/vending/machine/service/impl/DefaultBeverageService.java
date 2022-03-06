@@ -26,6 +26,7 @@ public class DefaultBeverageService implements BeverageService {
     @Override
     public Order placeDrinkRequest(Beverage beverage, Collection<AddsOn> addsOn, String phoneNumber) {
         try {
+            addsOn.stream().forEach(addOn -> beverage.addAddOn(addOn));
             maker.checkDrinkFeasibility(beverage, addsOn);
             return Order.builder()
                     .beverage(beverage)
@@ -41,7 +42,7 @@ public class DefaultBeverageService implements BeverageService {
     @Override
     public void collectPayment(Order order, Double userPaid) {
 
-        PaymentService.Change change = inHouseService.processPayment(order.getOrderPrice());
+        PaymentService.Change change = inHouseService.processPayment(userPaid, order.getOrderPrice());
 
         if (!change.getDescription().equalsIgnoreCase("settled")) {
             order.setStatus(Order.Status.FAILED);

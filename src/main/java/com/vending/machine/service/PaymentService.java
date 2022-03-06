@@ -8,7 +8,7 @@ import lombok.ToString;
 
 public interface PaymentService {
 
-    Change processPayment(Price priceLeft);
+    Change processPayment(Double userPaid, Price orderPrice);
 
     @Builder
     @ToString

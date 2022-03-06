@@ -1,15 +1,13 @@
 package com.vending.machine.service;
 
-import com.vending.machine.domain.Price;
 import com.vending.machine.service.dispenser.*;
 
 
 public class CoinProcessor {
 
-    public PaymentService.Change dispenseChange(Price price) {
+    public PaymentService.Change dispenseChange(Double price) {
         CoinDispenser handler = getCoinHandler();
-        handler.processAmt(price.getVal()*100);
-        return null;
+        return handler.processAmt(price*100);
     }
 
     private static CoinDispenser getCoinHandler() {
