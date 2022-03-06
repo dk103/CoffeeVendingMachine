@@ -1,0 +1,12 @@
+/Users/dmishra/Documents/lld-playground/src/main/java/com/vending/machine/domain/Product.java
+/Users/dmishra/Documents/lld-playground/src/main/java/com/vending/machine/domain/Espresso.java
+/Users/dmishra/Documents/lld-playground/src/main/java/com/vending/machine/service/VendingInventoryService.java
+/Users/dmishra/Documents/lld-playground/src/main/java/com/vending/machine/domain/IComposeProduct.java
+/Users/dmishra/Documents/lld-playground/src/main/java/com/vending/machine/domain/RawIngredient.java
+/Users/dmishra/Documents/lld-playground/src/main/java/com/vending/machine/domain/IProduct.java
+/Users/dmishra/Documents/lld-playground/src/main/java/com/vending/machine/domain/Capuccino.java
+/Users/dmishra/Documents/lld-playground/src/main/java/com/vending/machine/Application.java
+/Users/dmishra/Documents/lld-playground/src/main/java/com/vending/machine/service/IInventory.java
+/Users/dmishra/Documents/lld-playground/src/main/java/com/vending/machine/storage/InMemoryStorageStrategy.java
+/Users/dmishra/Documents/lld-playground/src/main/java/com/vending/machine/domain/AddsOn.java
+/Users/dmishra/Documents/lld-playground/src/main/java/com/vending/machine/storage/StorageStrategy.java
