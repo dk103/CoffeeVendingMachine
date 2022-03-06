@@ -11,9 +11,10 @@ public class MyOrderSubscriber implements Observer {
     private Subject<?> topic;
     DispenseService dispenseService;
 
-    public MyOrderSubscriber(String nm){
-        this.name=nm;
+    public MyOrderSubscriber(String name){
+        this.name=name;
     }
+
     @Override
     public void update() {
         Order msg = (Order) topic.getUpdate(this);
@@ -21,7 +22,7 @@ public class MyOrderSubscriber implements Observer {
             System.out.println(name+":: No new order");
         }else {
             dispenseService.dispenseOrder(msg);
-            System.out.println(name + ":: Consuming message::" + msg);
+            System.out.println(name + ":: Consuming new order::" + msg);
 
         }
     }

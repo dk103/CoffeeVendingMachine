@@ -5,6 +5,7 @@ import com.vending.machine.domain.Beverage;
 import com.vending.machine.domain.Order;
 import com.vending.machine.exception.DrinkNotAvailableException;
 import com.vending.machine.exception.OrderException;
+import com.vending.machine.pubsub.TopicLoader;
 import com.vending.machine.pubsub.impl.MyOrderTopic;
 import com.vending.machine.service.BeverageService;
 import com.vending.machine.service.DrinkMaker;
@@ -21,6 +22,7 @@ public class DefaultBeverageService implements BeverageService {
     public DefaultBeverageService(PaymentService inHouseService) {
         this.maker = new DrinkMaker();
         this.inHouseService = inHouseService;
+        orderTopic = TopicLoader.getTopic();
     }
 
     @Override
