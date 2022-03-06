@@ -5,8 +5,8 @@ import com.vending.machine.domain.Beverage;
 import com.vending.machine.domain.Order;
 import com.vending.machine.exception.DrinkNotAvailableException;
 import com.vending.machine.exception.OrderException;
+import com.vending.machine.pubsub.impl.MyOrderTopic;
 import com.vending.machine.service.BeverageService;
-import com.vending.machine.service.DispenseService;
 import com.vending.machine.service.DrinkMaker;
 import com.vending.machine.service.PaymentService;
 
@@ -16,7 +16,7 @@ public class DefaultBeverageService implements BeverageService {
 
     DrinkMaker maker;
     PaymentService inHouseService;
-    DispenseService dispenseService;
+    MyOrderTopic orderTopic;
 
     public DefaultBeverageService(PaymentService inHouseService) {
         this.maker = new DrinkMaker();
@@ -26,7 +26,7 @@ public class DefaultBeverageService implements BeverageService {
     @Override
     public Order placeDrinkRequest(Beverage beverage, Collection<AddsOn> addsOn, String phoneNumber) {
         try {
-            addsOn.stream().forEach(addOn -> beverage.addAddOn(addOn));
+            addsOn.forEach(addOn -> beverage.addAddOn(addOn));
             maker.checkDrinkFeasibility(beverage, addsOn);
             return Order.builder()
                     .beverage(beverage)
@@ -47,8 +47,10 @@ public class DefaultBeverageService implements BeverageService {
         if (!change.getDescription().equalsIgnoreCase("settled")) {
             order.setStatus(Order.Status.FAILED);
             System.out.println("Payment failed to process");
+            return;
         }
         order.setStatus(Order.Status.PAID);
+        orderTopic.postMessage(order);
         System.out.println("payment done :: change returned - " + change.getVal());
 
     }
